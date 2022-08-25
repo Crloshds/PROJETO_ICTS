@@ -1,11 +1,6 @@
 import './App.css';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Axios from "axios";
-
-
-
-
-
 
 function App() {
 
@@ -13,6 +8,9 @@ function App() {
   const [description, setDescription]= useState('');
   const [price, setPrice]= useState(0);
   const [ listaProdutos, setListaProdutos] = useState([]);
+  useEffect(() => {
+    getProdutos();
+  },[]);
 
   
   const addProduct = () => {
@@ -21,6 +19,7 @@ function App() {
       description: description, 
       price: price
     }).then(()=> {
+      getProdutos();
       console.log("success");
     });
   };
@@ -31,8 +30,15 @@ function App() {
   });   
   }
 
+  const deleteProduct = (id) => {
+    Axios.delete('http://localhost:3001/products/'+id).then((response)=> {
+      getProdutos();
+  });}
+  
   return ( <div className="App">
+    
     <div className="information">
+    <h1>Registre seu produto</h1>
       <label>Produto:</label>
       <input 
         type="text" 
@@ -55,13 +61,15 @@ function App() {
       <button onClick={addProduct}>Registrar Produto</button>
     </div>
       <hr />
+      <h2>Lista de produtos</h2>
         <div className="produtos">
-        <button onClick={getProdutos}>Mostrar produtos</button>
-
         {listaProdutos.map((val, key) => {
-          return <div className='listaProduto'>
+          return <div className='listaProduto' key={val.id}>
             <h3>Produto: {val.nome}</h3>
             <h3>Preço: {val.preco}</h3>
+            <div>
+              <button onClick={()=> deleteProduct(val.id)}>Excluir</button>
+            </div>
           </div>
         })}
         </div>
