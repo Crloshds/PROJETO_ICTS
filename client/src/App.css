@@ -1,0 +1,48 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.information {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.information input {
+  width: 18.75rem; /*300px*/
+  height: 3rem;
+  font-size: 1rem;
+  padding-left: 0.75rem;
+  margin: 0.5rem;
+}
+
+.information button {
+  width: 15rem; 
+  height: 3rem;
+  margin-top: 1rem;
+}
+
+.information button:hover {
+  cursor: pointer;
+}
+
+.produtos {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.listaProduto {
+  display: flex;
+  align-items: flex-start;
+  justify-content:center;
+  width: 43rem;
+  border: 1px solid black;
+  margin: 0.85px;
+  padding: 0.85rem;
+  flex-direction: column;
+}
